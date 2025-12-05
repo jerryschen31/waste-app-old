@@ -1,0 +1,8 @@
+# Python virtual environment
+ml_env/
+
+# Downloaded model artifacts
+models/recycling-net-11/
+
+# Intermediate ONNX file from conversion
+models/coreml/recycling_net_11.onnx
