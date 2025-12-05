@@ -6,3 +6,6 @@ models/recycling-net-11/
 
 # Intermediate ONNX file from conversion
 models/coreml/recycling_net_11.onnx
+
+# Swift Package Manager build artifacts
+/.build/
