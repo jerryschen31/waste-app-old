@@ -61,12 +61,19 @@ public class RecyclingNetModelLoader {
         // Run inference
         let output = try model.prediction(from: input)
         
-        // Parse output logits and convert to probabilities
+        // Parse output logits and convert to probabilities (per-class)
         guard let logits = output.featureValue(for: "logits")?.multiArrayValue else {
             throw LoadError.inferenceError("Invalid output format from model")
         }
-        
-        return softmax(logits: logits)
+
+        let classProbs = classProbabilities(from: logits)
+        // Convert to [String: Double] for compatibility with existing callers
+        var results: [String: Double] = [:]
+        for (cls, prob) in classProbs {
+            results[cls.rawValue] = prob
+        }
+
+        return results
     }
     
     /// Preprocess image to match model input requirements (384x384, normalized).
@@ -85,34 +92,64 @@ public class RecyclingNetModelLoader {
         return pixelBuffer
     }
     
-    /// Convert raw logits to softmax probabilities.
-    /// - Parameter logits: Raw output from model (11 values)
-    /// - Returns: Dictionary mapping waste category to probability
-    private func softmax(logits: MLMultiArray) -> [String: Double] {
-        var results: [String: Double] = [:]
-        let classes = WasteCategory.allCases
-        
-        // Extract raw logits as doubles
-        var logitsArray: [Double] = []
-        for i in 0..<logits.count {
-            if let val = logits[i] as? NSNumber {
-                logitsArray.append(Double(truncating: val))
-            }
-        }
-        
-        // Compute softmax: softmax(x_i) = exp(x_i) / sum(exp(x_j))
-        let maxLogit = logitsArray.max() ?? 0.0  // Subtract max for numerical stability
+    private func softmaxArray(_ logitsArray: [Double]) -> [Double] {
+        let maxLogit = logitsArray.max() ?? 0.0
         let exps = logitsArray.map { exp($0 - maxLogit) }
         let sumExp = exps.reduce(0.0, +)
-        let probabilities = exps.map { $0 / sumExp }
-        
-        // Map to class labels
-        for (idx, prob) in probabilities.enumerated() {
-            if idx < classes.count {
-                results[classes[idx].rawValue] = prob
+        guard sumExp > 0 else { return exps.map { _ in 0.0 } }
+        return exps.map { $0 / sumExp }
+    }
+
+    /// Convert raw logits to per-class probabilities keyed by `WasteCategory`.
+    private func classProbabilities(from logits: MLMultiArray) -> [WasteCategory: Double] {
+        var logitsArray: [Double] = []
+        for i in 0..<logits.count {
+            let num = logits[i]
+            let val = (num as? NSNumber).map { Double(truncating: $0) } ?? 0.0
+            logitsArray.append(val)
+        }
+
+        let probs = softmaxArray(logitsArray)
+        var result: [WasteCategory: Double] = [:]
+        for (idx, p) in probs.enumerated() {
+            if let wc = WasteCategory.fromIndex(idx) {
+                result[wc] = p
             }
         }
-        
+        return result
+    }
+
+    /// Aggregate per-class probabilities into the reduced 5-category disposal mapping.
+    /// - Parameter logits: Raw output from model
+    /// - Returns: Mapping of aggregated disposal category name -> probability
+    public func inferAggregated(on pixelBuffer: CVPixelBuffer) throws -> [String: Double] {
+        guard let model = self.model else {
+            throw LoadError.inferenceError("Model not loaded. Call load() first.")
+        }
+
+        let preprocessed = try preprocessImage(pixelBuffer)
+        let input = try RecyclingNetInput(pixelArray: preprocessed)
+        let output = try model.prediction(from: input)
+
+        guard let logits = output.featureValue(for: "logits")?.multiArrayValue else {
+            throw LoadError.inferenceError("Invalid output format from model")
+        }
+
+        let classProbs = classProbabilities(from: logits)
+
+        // Aggregation mapping from fine-grained model classes to the requested 5 categories
+        var aggregated: [DisposalCategory: Double] = [:]
+        for (cls, prob) in classProbs {
+            let agg = cls.toDisposalCategory()
+            aggregated[agg, default: 0.0] += prob
+        }
+
+        // Convert to [String: Double]
+        var results: [String: Double] = [:]
+        for (k, v) in aggregated {
+            results[k.rawValue] = v
+        }
+
         return results
     }
 }
@@ -146,21 +183,51 @@ private struct RecyclingNetInput {
 /// Waste categories that the model can classify.
 /// These should match model's id2label mapping.
 public enum WasteCategory: String, CaseIterable {
-    case paper = "Paper"
-    case cardboard = "Cardboard"
-    case biological = "Biological"
-    case metals = "Metals"
-    case plastic = "Plastic"
-    case glass = "Glass"
-    case clothes = "Clothes"
-    case shoes = "Shoes"
-    case battery = "Battery"
-    case trash = "Trash"
-    case other = "Other"
-    
-    /// Get category from class index (0-10)
+    // Exact labels returned by the model (index order must match model output)
+    case aluminium = "aluminium"
+    case batteries = "batteries"
+    case cardboard = "cardboard"
+    case disposablePlates = "disposable plates"
+    case glass = "glass"
+    case hardPlastic = "hard plastic"
+    case paper = "paper"
+    case paperTowel = "paper towel"
+    case polystyrene = "polystyrene"
+    case softPlastics = "soft plastics"
+    case takeawayCups = "takeaway cups"
+
+    /// Get category from class index (0-10). The order MUST match the model's output order.
     public static func fromIndex(_ index: Int) -> WasteCategory? {
         guard index >= 0 && index < allCases.count else { return nil }
         return allCases[index]
+    }
+}
+
+/// High-level disposal categories the app will surface (reduced set).
+public enum DisposalCategory: String {
+    case trash = "Trash"
+    case compost = "Compost"
+    case recycle = "Recycle"
+    case ewaste = "E-waste"
+    case biological = "Biological Waste"
+}
+
+extension WasteCategory {
+    /// Map fine-grained model classes to the reduced disposal categories.
+    /// Conservative defaults chosen per your guidance.
+    func toDisposalCategory() -> DisposalCategory {
+        switch self {
+        case .aluminium, .cardboard, .glass, .hardPlastic, .paper, .softPlastics:
+            // Core recyclable materials
+            return .recycle
+        case .batteries:
+            return .ewaste
+        case .paperTowel, .disposablePlates, .takeawayCups:
+            // Paper towel and some single-use paper items -> compost
+            return .compost
+        case .polystyrene:
+            // User requested polystyrene -> Trash
+            return .trash
+        }
     }
 }
