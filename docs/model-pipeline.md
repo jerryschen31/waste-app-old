@@ -72,6 +72,24 @@ For Phase 1 we adopt a two-stage cascade applied per detected object in an image
 
 This reduces average cost by avoiding the heavier multi-class pass on clearly food examples.
 
+### RecyclingNet11 Class Mapping (11 → 5 Categories)
+
+RecyclingNet11 classifies waste into 11 detailed categories, which are then mapped to 5 final user-facing categories for the app:
+
+| RN Index | RN Class | Final Category |
+|----------|----------|----------------|
+| 0 | Paper | Recycle |
+| 1 | Cardboard | Recycle |
+| 2 | Biological | Compost |
+| 3 | Metals | Recycle |
+| 4 | Plastic | Recycle |
+| 5 | Glass | Recycle |
+| 6 | Clothes | Recycle |
+| 7 | Shoes | Recycle |
+| 8 | Battery | e-Waste |
+| 9 | Trash | Trash |
+| 10 | Other | Trash |
+
 ---
 
 ### **Step 2: Inspect the Model**
