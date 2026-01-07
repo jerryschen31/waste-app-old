@@ -20,17 +20,16 @@
 
 ### **Phase 1: MVP (Recommended)**
 **Start with: Recycling-Net-11**
-- Pre-trained on waste data
-- 11 categories sufficient for MVP
-- Efficient, ANE-friendly
-- Apache 2.0 licensed
-- Clear conversion path to Core ML
-
-### **Phase 2: Optimization (if needed)**
+- Note (session measurements): on the development machine used for conversion and benchmarking in this session (Apple M-series using `coremltools`), measured latencies (50-run) were approximately:
+   - `FoodDetector` (binary): mean ~1.19 ms, median ~1.16 ms, p95 ~1.33 ms
+   - `RecyclingNet11` (11-way): mean ~4.59 ms, median ~4.58 ms, p95 ~4.69 ms
+   - Combined (naive sum on that hardware): ~6 ms average for the cascade
+   - These numbers are useful for relative comparison; on-device (iPhone) latencies may be higher. Keep the current mobile acceptance target of median <600 ms per item while aiming for median <100 ms after quantization/optimization.
 - **Higher accuracy required?** → Fine-tune **EfficientNet-Lite1** on your proprietary dataset
 - **Multi-item scenes?** → Add **YOLOv8n** as optional detector layer
 - **Fallback needed?** → Implement **Vision Feature Prints** for similarity-based lookup
 
+    - Implement the `FoodDetector` → `RecyclingNet11` cascade: run `FoodDetector` first and skip the multi-class model for detected food items; classify food as `Compost`.
 ### **Phase 3+: Advanced**
 - **Scene complexity?** → Consider **MobileViT-XS** if clutter handling critical
 - **Zero-shot capability?** → Integrate **CLIP** for open-vocabulary waste categories

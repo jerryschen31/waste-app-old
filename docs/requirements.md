@@ -15,7 +15,8 @@
 6. **Accessibility**: As a user, I can operate the app with VoiceOver and large text modes.
 
 ## 3. Functional Requirements
-- **For Capture**: Camera pipeline must deliver still-image inference within 600ms median latency on target hardware.
+- **Cascade behavior**: Per detected object, the app runs a `FoodDetector` first. If the object is classified as food the final disposal is `Compost` and the multi-class `RecyclingNet11` model is not run. If not food, `RecyclingNet11` is executed and its 11-class outputs are aggregated into 5 disposal categories (`Trash`, `Recycle`, `Compost`, `Biological Waste`, `E-waste`).
+- **For Capture**: Camera pipeline must deliver still-image inference within 600ms median latency on target hardware. (Session note: local Core ML benchmarking on an Apple M-series machine measured `FoodDetector` ~1.19ms and `RecyclingNet11` ~4.59ms; combined ~6ms — use as a relative baseline.)
 - **For Inference**: Core ML model packaged with the app; model update mechanism may download signed bundles.
 - **Confidence Handling**: Low-confidence predictions (< configurable threshold) must prompt user confirmation before finalizing.
 - **Telemetry**: Collect only opt-in, anonymized aggregates (counts, corrections). Never store or transmit raw images.

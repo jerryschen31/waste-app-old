@@ -40,6 +40,12 @@
 - **CameraCaptureKit** abstracts camera access and ensures frames are delivered safely to the pipeline without leaking resources.
 - **Image Preprocessor** performs deterministic resizing/normalization so inference receives stable tensors and includes guard clauses for malformed buffers.
 - **Inference Engine** wraps Core ML with configuration for ANE acceleration and timeouts to avoid UI blocking.
+ - **Inference Engine** wraps Core ML with configuration for ANE acceleration and timeouts to avoid UI blocking.
+    - NOTE: In this Phase 1 design we run a small cascade per captured object:
+        1. A binary `FoodDetector` is executed first to determine whether the object is food.
+        2. If `FoodDetector` indicates food, the final classification is `Compost` and the larger multi-class model is skipped.
+        3. If not food, the `RecyclingNet11` model (11 classes) is executed and its output is aggregated into 5 disposal categories: `Trash`, `Recycle`, `Compost`, `Biological Waste`, and `E-waste`.
+    - This cascade reduces average end-to-end latency and avoids unnecessary multi-class inference on obvious food images.
 - **Signal Fusion** combines multiple signals (model, heuristics, text) and manages confidence thresholds.
 - **Recommendation Service** uses signed policy data to produce disposal guidance and user-facing explanations.
 - **Model Lifecycle Manager** validates and swaps models via signed manifests; interacts with Safety Net for fallback.
