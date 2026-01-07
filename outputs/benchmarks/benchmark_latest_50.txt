@@ -1,0 +1,115 @@
+Torch version 2.8.0 has not been tested with coremltools. You may run into unexpected errors. Torch 2.7.0 is the most recent version that has been tested.
+
+============================================================
+Loading Core ML model: models/coreml/FoodDetector.mlpackage
+Running benchmark...
+Runs: 50  mean=1.17ms  median=1.15ms  p95=1.31ms
+
+Sample classifications:
+run#01 data_balanced/test/food/pos__33__53827.jpg  time=1.16ms  food_prob=0.7834  not_food_prob=0.2166
+run#02 data_balanced/test/not_food/neg__f96a3303544978c5.jpg  time=1.15ms  food_prob=0.0000  not_food_prob=1.0000
+run#03 data_balanced/test/food/pos__37__60729.jpg  time=1.12ms  food_prob=0.9924  not_food_prob=0.0076
+run#04 data_balanced/test/food/pos__17__17046.jpg  time=1.10ms  food_prob=0.6572  not_food_prob=0.3428
+run#05 data_balanced/test/not_food/neg__c44ad9ebe8d630cd.jpg  time=1.24ms  food_prob=0.0000  not_food_prob=1.0000
+run#06 data_balanced/test/not_food/neg__001867b02494724f.jpg  time=1.43ms  food_prob=0.0000  not_food_prob=1.0000
+run#07 data_balanced/test/not_food/neg__c7c85d06225964d0.jpg  time=1.28ms  food_prob=0.0000  not_food_prob=1.0000
+run#08 data_balanced/test/food/pos__24__48074.jpg  time=1.18ms  food_prob=0.9655  not_food_prob=0.0345
+run#09 data_balanced/test/food/pos__5__15950.jpg  time=1.13ms  food_prob=0.9677  not_food_prob=0.0323
+run#10 data_balanced/test/not_food/neg__68a184b5edfb29fa.jpg  time=1.20ms  food_prob=0.0010  not_food_prob=0.9990
+run#11 data_balanced/test/not_food/neg__4b85071c67e43f58.jpg  time=1.29ms  food_prob=0.0005  not_food_prob=0.9995
+run#12 data_balanced/test/food/pos__43__12037.jpg  time=1.18ms  food_prob=0.9981  not_food_prob=0.0019
+run#13 data_balanced/test/food/pos__84__2454.jpg  time=1.12ms  food_prob=0.9911  not_food_prob=0.0089
+run#14 data_balanced/test/food/pos__18__58782.jpg  time=1.16ms  food_prob=0.9818  not_food_prob=0.0182
+run#15 data_balanced/test/not_food/neg__de3a207955dd773a.jpg  time=1.15ms  food_prob=0.0107  not_food_prob=0.9893
+run#16 data_balanced/test/food/pos__84__6938.jpg  time=1.15ms  food_prob=0.9743  not_food_prob=0.0257
+run#17 data_balanced/test/not_food/neg__425337721bac7dd3.jpg  time=1.18ms  food_prob=0.0024  not_food_prob=0.9976
+run#18 data_balanced/test/not_food/neg__2aeb5ab55ff87d7e.jpg  time=1.30ms  food_prob=0.0000  not_food_prob=1.0000
+run#19 data_balanced/test/food/pos__10__3443.jpg  time=1.14ms  food_prob=0.9530  not_food_prob=0.0470
+run#20 data_balanced/test/food/pos__75__50655.jpg  time=1.16ms  food_prob=0.9947  not_food_prob=0.0053
+run#21 data_balanced/test/food/pos__18__58899.jpg  time=1.14ms  food_prob=0.9555  not_food_prob=0.0445
+run#22 data_balanced/test/not_food/neg__2d381d695a6e6e28.jpg  time=1.10ms  food_prob=0.0000  not_food_prob=1.0000
+run#23 data_balanced/test/food/pos__91__67255.jpg  time=1.15ms  food_prob=0.9987  not_food_prob=0.0013
+run#24 data_balanced/test/not_food/neg__283ec6b8ea18b259.jpg  time=1.12ms  food_prob=0.0000  not_food_prob=1.0000
+run#25 data_balanced/test/not_food/neg__7a6152e293a9a19b.jpg  time=1.21ms  food_prob=0.0000  not_food_prob=1.0000
+run#26 data_balanced/test/not_food/neg__3553e0e93bad85ea.jpg  time=1.12ms  food_prob=0.0000  not_food_prob=1.0000
+run#27 data_balanced/test/food/pos__91__67175.jpg  time=1.11ms  food_prob=0.9832  not_food_prob=0.0168
+run#28 data_balanced/test/not_food/neg__76fd5b54b0cf9ac4.jpg  time=1.14ms  food_prob=0.8983  not_food_prob=0.1017
+run#29 data_balanced/test/food/pos__70__24580.jpg  time=1.13ms  food_prob=0.9716  not_food_prob=0.0284
+run#30 data_balanced/test/food/pos__38__6689.jpg  time=1.13ms  food_prob=0.7778  not_food_prob=0.2222
+run#31 data_balanced/test/not_food/neg__500dfd0e36718af5.jpg  time=1.29ms  food_prob=0.0010  not_food_prob=0.9990
+run#32 data_balanced/test/food/pos__17__17123.jpg  time=1.29ms  food_prob=0.9795  not_food_prob=0.0205
+run#33 data_balanced/test/food/pos__81__590.jpg  time=1.05ms  food_prob=0.9580  not_food_prob=0.0420
+run#34 data_balanced/test/food/pos__36__12280.jpg  time=1.10ms  food_prob=0.6641  not_food_prob=0.3359
+run#35 data_balanced/test/food/pos__77__1509.jpg  time=1.19ms  food_prob=0.9755  not_food_prob=0.0245
+run#36 data_balanced/test/food/pos__27__36624.jpg  time=1.13ms  food_prob=0.9887  not_food_prob=0.0113
+run#37 data_balanced/test/food/pos__16__25066.jpg  time=1.18ms  food_prob=0.9971  not_food_prob=0.0029
+run#38 data_balanced/test/not_food/neg__32fc3e65c922be20.jpg  time=1.19ms  food_prob=0.0005  not_food_prob=0.9995
+run#39 data_balanced/test/not_food/neg__8369056114bb7f7d.jpg  time=1.32ms  food_prob=0.0000  not_food_prob=1.0000
+run#40 data_balanced/test/not_food/neg__e9be198ec256c61a.jpg  time=1.16ms  food_prob=0.0039  not_food_prob=0.9961
+run#41 data_balanced/test/food/pos__9__31794.jpg  time=1.13ms  food_prob=0.9875  not_food_prob=0.0125
+run#42 data_balanced/test/not_food/neg__e02412c2ed0b651f.jpg  time=1.12ms  food_prob=0.0000  not_food_prob=1.0000
+run#43 data_balanced/test/food/pos__52__64428.jpg  time=1.01ms  food_prob=0.9756  not_food_prob=0.0244
+run#44 data_balanced/test/food/pos__96__27959.jpg  time=1.09ms  food_prob=0.8367  not_food_prob=0.1633
+run#45 data_balanced/test/food/pos__71__24893.jpg  time=1.11ms  food_prob=0.9970  not_food_prob=0.0030
+run#46 data_balanced/test/not_food/neg__bd4489b811d22de0.jpg  time=1.41ms  food_prob=0.0000  not_food_prob=1.0000
+run#47 data_balanced/test/not_food/neg__37f4162d54566078.jpg  time=1.15ms  food_prob=0.0000  not_food_prob=1.0000
+run#48 data_balanced/test/food/pos__36__37300.jpg  time=1.04ms  food_prob=0.7300  not_food_prob=0.2700
+run#49 data_balanced/test/not_food/neg__f25b9d5d4fed286e.jpg  time=1.16ms  food_prob=0.0005  not_food_prob=0.9995
+run#50 data_balanced/test/not_food/neg__eb5ed14ec49ca57c.jpg  time=1.19ms  food_prob=0.0005  not_food_prob=0.9995
+
+============================================================
+Loading Core ML model: models/coreml/RecyclingNet11.mlpackage
+Running benchmark...
+Runs: 50  mean=4.61ms  median=4.60ms  p95=4.77ms
+
+Sample classifications:
+run#01 data_balanced/test/food/pos__33__53827.jpg  time=4.59ms  top3=[glass:0.820, soft plastics:0.082, hard plastic:0.066]  aggregated=[Trash:0.009, Compost:0.003, Recycle:0.988, E-waste:0.000, Biological Waste:0.000]
+run#02 data_balanced/test/not_food/neg__f96a3303544978c5.jpg  time=4.65ms  top3=[cardboard:0.711, takeaway cups:0.094, polystyrene:0.042]  aggregated=[Trash:0.042, Compost:0.100, Recycle:0.852, E-waste:0.006, Biological Waste:0.000]
+run#03 data_balanced/test/food/pos__37__60729.jpg  time=4.77ms  top3=[glass:0.755, hard plastic:0.079, takeaway cups:0.068]  aggregated=[Trash:0.010, Compost:0.127, Recycle:0.862, E-waste:0.000, Biological Waste:0.000]
+run#04 data_balanced/test/food/pos__17__17046.jpg  time=4.50ms  top3=[glass:0.603, soft plastics:0.166, takeaway cups:0.091]  aggregated=[Trash:0.013, Compost:0.158, Recycle:0.826, E-waste:0.003, Biological Waste:0.000]
+run#05 data_balanced/test/not_food/neg__c44ad9ebe8d630cd.jpg  time=4.62ms  top3=[hard plastic:0.425, batteries:0.298, soft plastics:0.130]  aggregated=[Trash:0.016, Compost:0.046, Recycle:0.640, E-waste:0.298, Biological Waste:0.000]
+run#06 data_balanced/test/not_food/neg__001867b02494724f.jpg  time=4.61ms  top3=[hard plastic:0.707, soft plastics:0.193, glass:0.030]  aggregated=[Trash:0.022, Compost:0.026, Recycle:0.951, E-waste:0.001, Biological Waste:0.000]
+run#07 data_balanced/test/not_food/neg__c7c85d06225964d0.jpg  time=4.89ms  top3=[glass:0.864, aluminium:0.059, hard plastic:0.043]  aggregated=[Trash:0.009, Compost:0.005, Recycle:0.986, E-waste:0.000, Biological Waste:0.000]
+run#08 data_balanced/test/food/pos__24__48074.jpg  time=4.58ms  top3=[glass:0.732, disposable plates:0.229, hard plastic:0.018]  aggregated=[Trash:0.001, Compost:0.233, Recycle:0.766, E-waste:0.000, Biological Waste:0.000]
+run#09 data_balanced/test/food/pos__5__15950.jpg  time=4.60ms  top3=[glass:0.919, disposable plates:0.038, soft plastics:0.025]  aggregated=[Trash:0.001, Compost:0.049, Recycle:0.949, E-waste:0.001, Biological Waste:0.000]
+run#10 data_balanced/test/not_food/neg__68a184b5edfb29fa.jpg  time=4.63ms  top3=[glass:0.558, cardboard:0.200, polystyrene:0.091]  aggregated=[Trash:0.091, Compost:0.097, Recycle:0.812, E-waste:0.000, Biological Waste:0.000]
+run#11 data_balanced/test/not_food/neg__4b85071c67e43f58.jpg  time=4.63ms  top3=[aluminium:0.659, soft plastics:0.077, hard plastic:0.075]  aggregated=[Trash:0.025, Compost:0.039, Recycle:0.927, E-waste:0.009, Biological Waste:0.000]
+run#12 data_balanced/test/food/pos__43__12037.jpg  time=4.61ms  top3=[disposable plates:0.375, takeaway cups:0.325, glass:0.108]  aggregated=[Trash:0.010, Compost:0.703, Recycle:0.286, E-waste:0.001, Biological Waste:0.000]
+run#13 data_balanced/test/food/pos__84__2454.jpg  time=4.55ms  top3=[glass:0.966, disposable plates:0.011, takeaway cups:0.009]  aggregated=[Trash:0.001, Compost:0.021, Recycle:0.978, E-waste:0.000, Biological Waste:0.000]
+run#14 data_balanced/test/food/pos__18__58782.jpg  time=4.50ms  top3=[glass:0.760, soft plastics:0.088, paper:0.081]  aggregated=[Trash:0.002, Compost:0.059, Recycle:0.938, E-waste:0.001, Biological Waste:0.000]
+run#15 data_balanced/test/not_food/neg__de3a207955dd773a.jpg  time=4.56ms  top3=[soft plastics:0.650, disposable plates:0.095, glass:0.095]  aggregated=[Trash:0.044, Compost:0.141, Recycle:0.814, E-waste:0.001, Biological Waste:0.000]
+run#16 data_balanced/test/food/pos__84__6938.jpg  time=4.75ms  top3=[disposable plates:0.942, paper:0.032, soft plastics:0.017]  aggregated=[Trash:0.001, Compost:0.943, Recycle:0.056, E-waste:0.000, Biological Waste:0.000]
+run#17 data_balanced/test/not_food/neg__425337721bac7dd3.jpg  time=4.61ms  top3=[glass:0.600, hard plastic:0.245, soft plastics:0.082]  aggregated=[Trash:0.008, Compost:0.029, Recycle:0.963, E-waste:0.000, Biological Waste:0.000]
+run#18 data_balanced/test/not_food/neg__2aeb5ab55ff87d7e.jpg  time=4.56ms  top3=[aluminium:0.540, glass:0.368, polystyrene:0.031]  aggregated=[Trash:0.031, Compost:0.009, Recycle:0.958, E-waste:0.001, Biological Waste:0.000]
+run#19 data_balanced/test/food/pos__10__3443.jpg  time=4.70ms  top3=[glass:0.597, disposable plates:0.325, soft plastics:0.041]  aggregated=[Trash:0.002, Compost:0.337, Recycle:0.660, E-waste:0.000, Biological Waste:0.000]
+run#20 data_balanced/test/food/pos__75__50655.jpg  time=4.63ms  top3=[glass:0.810, paper:0.122, cardboard:0.025]  aggregated=[Trash:0.004, Compost:0.027, Recycle:0.969, E-waste:0.000, Biological Waste:0.000]
+run#21 data_balanced/test/food/pos__18__58899.jpg  time=4.52ms  top3=[glass:0.731, disposable plates:0.181, soft plastics:0.039]  aggregated=[Trash:0.002, Compost:0.201, Recycle:0.796, E-waste:0.001, Biological Waste:0.000]
+run#22 data_balanced/test/not_food/neg__2d381d695a6e6e28.jpg  time=4.68ms  top3=[polystyrene:0.440, paper:0.347, paper towel:0.167]  aggregated=[Trash:0.440, Compost:0.180, Recycle:0.379, E-waste:0.000, Biological Waste:0.000]
+run#23 data_balanced/test/food/pos__91__67255.jpg  time=4.59ms  top3=[disposable plates:0.525, glass:0.360, cardboard:0.048]  aggregated=[Trash:0.009, Compost:0.536, Recycle:0.455, E-waste:0.000, Biological Waste:0.000]
+run#24 data_balanced/test/not_food/neg__283ec6b8ea18b259.jpg  time=4.57ms  top3=[hard plastic:0.486, glass:0.394, soft plastics:0.041]  aggregated=[Trash:0.016, Compost:0.042, Recycle:0.938, E-waste:0.004, Biological Waste:0.000]
+run#25 data_balanced/test/not_food/neg__7a6152e293a9a19b.jpg  time=4.81ms  top3=[takeaway cups:0.448, hard plastic:0.314, glass:0.085]  aggregated=[Trash:0.010, Compost:0.461, Recycle:0.503, E-waste:0.025, Biological Waste:0.000]
+run#26 data_balanced/test/not_food/neg__3553e0e93bad85ea.jpg  time=4.73ms  top3=[glass:0.786, hard plastic:0.067, aluminium:0.056]  aggregated=[Trash:0.015, Compost:0.004, Recycle:0.980, E-waste:0.000, Biological Waste:0.000]
+run#27 data_balanced/test/food/pos__91__67175.jpg  time=4.65ms  top3=[disposable plates:0.961, glass:0.027, soft plastics:0.004]  aggregated=[Trash:0.001, Compost:0.961, Recycle:0.037, E-waste:0.000, Biological Waste:0.000]
+run#28 data_balanced/test/not_food/neg__76fd5b54b0cf9ac4.jpg  time=4.66ms  top3=[glass:0.748, paper:0.125, cardboard:0.047]  aggregated=[Trash:0.010, Compost:0.032, Recycle:0.957, E-waste:0.000, Biological Waste:0.000]
+run#29 data_balanced/test/food/pos__70__24580.jpg  time=4.56ms  top3=[paper:0.446, disposable plates:0.264, glass:0.121]  aggregated=[Trash:0.002, Compost:0.266, Recycle:0.732, E-waste:0.000, Biological Waste:0.000]
+run#30 data_balanced/test/food/pos__38__6689.jpg  time=4.78ms  top3=[disposable plates:0.800, glass:0.063, takeaway cups:0.048]  aggregated=[Trash:0.022, Compost:0.854, Recycle:0.124, E-waste:0.000, Biological Waste:0.000]
+run#31 data_balanced/test/not_food/neg__500dfd0e36718af5.jpg  time=4.70ms  top3=[hard plastic:0.259, cardboard:0.244, soft plastics:0.148]  aggregated=[Trash:0.087, Compost:0.066, Recycle:0.841, E-waste:0.005, Biological Waste:0.000]
+run#32 data_balanced/test/food/pos__17__17123.jpg  time=4.50ms  top3=[glass:0.515, takeaway cups:0.240, soft plastics:0.170]  aggregated=[Trash:0.004, Compost:0.276, Recycle:0.719, E-waste:0.001, Biological Waste:0.000]
+run#33 data_balanced/test/food/pos__81__590.jpg  time=4.66ms  top3=[disposable plates:0.515, hard plastic:0.157, takeaway cups:0.096]  aggregated=[Trash:0.030, Compost:0.612, Recycle:0.352, E-waste:0.007, Biological Waste:0.000]
+run#34 data_balanced/test/food/pos__36__12280.jpg  time=4.52ms  top3=[disposable plates:0.933, glass:0.034, hard plastic:0.011]  aggregated=[Trash:0.009, Compost:0.937, Recycle:0.054, E-waste:0.001, Biological Waste:0.000]
+run#35 data_balanced/test/food/pos__77__1509.jpg  time=4.59ms  top3=[glass:0.813, paper:0.071, cardboard:0.063]  aggregated=[Trash:0.007, Compost:0.023, Recycle:0.969, E-waste:0.000, Biological Waste:0.000]
+run#36 data_balanced/test/food/pos__27__36624.jpg  time=4.46ms  top3=[disposable plates:0.620, glass:0.312, hard plastic:0.032]  aggregated=[Trash:0.001, Compost:0.623, Recycle:0.375, E-waste:0.000, Biological Waste:0.000]
+run#37 data_balanced/test/food/pos__16__25066.jpg  time=4.56ms  top3=[glass:0.931, cardboard:0.018, takeaway cups:0.017]  aggregated=[Trash:0.002, Compost:0.024, Recycle:0.974, E-waste:0.000, Biological Waste:0.000]
+run#38 data_balanced/test/not_food/neg__32fc3e65c922be20.jpg  time=4.51ms  top3=[cardboard:0.872, paper:0.024, paper towel:0.024]  aggregated=[Trash:0.017, Compost:0.027, Recycle:0.952, E-waste:0.004, Biological Waste:0.000]
+run#39 data_balanced/test/not_food/neg__8369056114bb7f7d.jpg  time=4.71ms  top3=[disposable plates:0.665, cardboard:0.103, paper:0.071]  aggregated=[Trash:0.010, Compost:0.700, Recycle:0.290, E-waste:0.000, Biological Waste:0.000]
+run#40 data_balanced/test/not_food/neg__e9be198ec256c61a.jpg  time=4.49ms  top3=[hard plastic:0.595, soft plastics:0.316, glass:0.072]  aggregated=[Trash:0.005, Compost:0.006, Recycle:0.989, E-waste:0.000, Biological Waste:0.000]
+run#41 data_balanced/test/food/pos__9__31794.jpg  time=4.60ms  top3=[paper:0.375, polystyrene:0.275, disposable plates:0.176]  aggregated=[Trash:0.275, Compost:0.254, Recycle:0.469, E-waste:0.001, Biological Waste:0.000]
+run#42 data_balanced/test/not_food/neg__e02412c2ed0b651f.jpg  time=4.53ms  top3=[glass:0.290, cardboard:0.224, hard plastic:0.155]  aggregated=[Trash:0.110, Compost:0.071, Recycle:0.819, E-waste:0.001, Biological Waste:0.000]
+run#43 data_balanced/test/food/pos__52__64428.jpg  time=4.47ms  top3=[disposable plates:0.808, soft plastics:0.172, glass:0.007]  aggregated=[Trash:0.004, Compost:0.809, Recycle:0.187, E-waste:0.000, Biological Waste:0.000]
+run#44 data_balanced/test/food/pos__96__27959.jpg  time=4.58ms  top3=[disposable plates:0.761, glass:0.173, paper:0.024]  aggregated=[Trash:0.003, Compost:0.774, Recycle:0.222, E-waste:0.000, Biological Waste:0.000]
+run#45 data_balanced/test/food/pos__71__24893.jpg  time=4.52ms  top3=[glass:0.588, soft plastics:0.338, paper:0.032]  aggregated=[Trash:0.002, Compost:0.022, Recycle:0.974, E-waste:0.001, Biological Waste:0.000]
+run#46 data_balanced/test/not_food/neg__bd4489b811d22de0.jpg  time=4.63ms  top3=[glass:0.622, soft plastics:0.134, hard plastic:0.079]  aggregated=[Trash:0.040, Compost:0.007, Recycle:0.944, E-waste:0.009, Biological Waste:0.000]
+run#47 data_balanced/test/not_food/neg__37f4162d54566078.jpg  time=4.67ms  top3=[takeaway cups:0.331, glass:0.272, aluminium:0.158]  aggregated=[Trash:0.017, Compost:0.339, Recycle:0.642, E-waste:0.002, Biological Waste:0.000]
+run#48 data_balanced/test/food/pos__36__37300.jpg  time=4.46ms  top3=[glass:0.987, takeaway cups:0.005, cardboard:0.002]  aggregated=[Trash:0.001, Compost:0.006, Recycle:0.993, E-waste:0.000, Biological Waste:0.000]
+run#49 data_balanced/test/not_food/neg__f25b9d5d4fed286e.jpg  time=4.52ms  top3=[soft plastics:0.435, hard plastic:0.179, polystyrene:0.128]  aggregated=[Trash:0.128, Compost:0.085, Recycle:0.782, E-waste:0.005, Biological Waste:0.000]
+run#50 data_balanced/test/not_food/neg__eb5ed14ec49ca57c.jpg  time=4.60ms  top3=[aluminium:0.411, polystyrene:0.230, glass:0.126]  aggregated=[Trash:0.230, Compost:0.017, Recycle:0.752, E-waste:0.001, Biological Waste:0.000]

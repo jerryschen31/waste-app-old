@@ -1,0 +1,31 @@
+Torch version 2.8.0 has not been tested with coremltools. You may run into unexpected errors. Torch 2.7.0 is the most recent version that has been tested.
+
+============================================================
+Loading Core ML model: models/coreml/FoodDetector.mlpackage
+Running benchmark...
+Runs: 50  mean=1.17ms  median=1.16ms  p95=1.30ms
+
+Sample classifications:
+data_balanced/test/food/pos__5__15950.jpg  time=1.34ms  out=[0:0.032]
+data_balanced/test/food/pos__16__25066.jpg  time=1.08ms  out=[0:0.003]
+data_balanced/test/not_food/neg__c44ad9ebe8d630cd.jpg  time=1.16ms  out=[0:1.000]
+data_balanced/test/not_food/neg__425337721bac7dd3.jpg  time=1.14ms  out=[0:0.998]
+data_balanced/test/food/pos__24__48074.jpg  time=1.10ms  out=[0:0.035]
+data_balanced/test/food/pos__17__17123.jpg  time=1.16ms  out=[0:0.020]
+data_balanced/test/food/pos__70__24580.jpg  time=1.20ms  out=[0:0.028]
+data_balanced/test/not_food/neg__500dfd0e36718af5.jpg  time=1.11ms  out=[0:0.999]
+
+============================================================
+Loading Core ML model: models/coreml/RecyclingNet11.mlpackage
+Running benchmark...
+Runs: 50  mean=4.57ms  median=4.55ms  p95=4.75ms
+
+Sample classifications:
+data_balanced/test/food/pos__5__15950.jpg  time=4.48ms  out=[4:5.328, 3:2.137, 9:1.710]
+data_balanced/test/food/pos__16__25066.jpg  time=4.50ms  out=[4:5.352, 2:1.423, 10:1.331]
+data_balanced/test/not_food/neg__c44ad9ebe8d630cd.jpg  time=4.62ms  out=[5:3.275, 1:2.920, 9:2.088]
+data_balanced/test/not_food/neg__425337721bac7dd3.jpg  time=4.56ms  out=[4:4.129, 5:3.234, 9:2.145]
+data_balanced/test/food/pos__24__48074.jpg  time=4.57ms  out=[4:5.246, 3:4.086, 5:1.545]
+data_balanced/test/food/pos__17__17123.jpg  time=4.58ms  out=[4:3.943, 10:3.180, 9:2.836]
+data_balanced/test/food/pos__70__24580.jpg  time=4.56ms  out=[6:4.168, 3:3.643, 4:2.861]
+data_balanced/test/not_food/neg__500dfd0e36718af5.jpg  time=4.54ms  out=[5:1.924, 2:1.866, 9:1.366]
