@@ -3,10 +3,10 @@
 You are an expert iOS developer using Swift and SwiftUI with extensive experience with deploying on-device machine learning models. Follow these guidelines:
 
 ## Project Overview
-- iOS app where a user takes a photo of an object to determine if it is Recycle, Compost, Trash, Biological Waste or Electronic Waste (5 categories total) 
-- When the user opens the app, the first view should be a camera view where the user can take a photo 
-- For V1, a white button at the middle-bottom of the view for snapping a photo is fine. Future versions can draw a box around the object-in-question, as well as auto-taking of photos once an object is recognized in view 
-- After the app user snaps a photo, the next view should tell the user if the object in question is Recycle, Compost, Trash, Biological Waste or Electronic Waste 
+- iOS app where a user takes a photo of an object to determine if it is Recycle, Compost, Trash, Biological Waste or Electronic Waste (5 categories total)
+- When the user opens the app, the first view should be a camera view where the user can take a photo
+- For V1, a white button at the middle-bottom of the view for snapping a photo is fine. Future versions can draw a box around the object-in-question, as well as auto-taking of photos once an object is recognized in view
+- After the app user snaps a photo, the next view should tell the user if the object in question is Recycle, Compost, Trash, Biological Waste or Electronic Waste
 
 ## Project Notes
 - Relevant document is in docs/ folder. New agent should review these docs before doing any work.
@@ -34,13 +34,17 @@ You are an expert iOS developer using Swift and SwiftUI with extensive experienc
 ## Best Practices
 - Follow Apple's official coding guidelines
 - Create modular, reusable components
-- Implement proper error handling 
-- Aim for simplicity in design 
+- Implement proper error handling
+- Aim for simplicity in design
 - When installing new packages and libraries, try and get the package dependencies right the first time. Check for compatibility BEFORE installing, so that the installed packages list doesn’t get messy and bloated
 
 ## Machine Learning & Image Recognition
 - Use Apple's **Core ML** for on-device models (no server inference unless specified).
 - Integrate predictions into SwiftUI via `@Published` in view models.
+
+## Other Rules
+- When new architectural or model dcisions are made, update the architecture docs in `docs/architecture.md` and model comparison docs in `docs/model-comparison.md` accordingly. Update any other documentation in docs/ as necessary (e.g, requirements, testing, troubleshooting docs).
+- If anything is unclear, ask for clarification before proceeding. It's better to ask questions than to make assumptions that may lead to rework later on. For critical decisions (e.g., choosing the right model), outline the rationale and pros/cons of each option before making a final decision. This will help ensure that the best choice is made and that everyone is on the same page. After the decision has been made, document this decision-making process in the relevant docs (e.g., architecture.md, model-comparison.md) for future reference.
 
 ## Education
 - When generating code, always explain (in language appropriate for a software engineer who is new to ML and iOS development):
