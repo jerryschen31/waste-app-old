@@ -95,7 +95,8 @@ def export_to_coreml(model, processor, class_names):
             ct.ImageType(
                 name="input",
                 shape=(1, 3, height, width),
-                scale=1.0 / 255.0
+                scale=2.0 / 255.0,
+                bias=[-1.0, -1.0, -1.0]
             )
         ],
         classifier_config=classifier_config,

@@ -24,7 +24,7 @@ TEST_DATA_DIR = Path("data/waste_test_filtered")
 FOOD_MODEL_PATH = "models/coreml/FoodDetector.mlpackage"
 # Use the fine-tuned model
 RECYCLING_MODEL_PATH = "models/coreml/RecyclingNet11ex.mlpackage" 
-OUTPUT_DIR = Path("outputs/benchmarks/run-20260121-3")
+OUTPUT_DIR = Path("outputs/benchmarks/run-20260121-6")
 
 # Mapping: Fine-tuned Model Classes -> Final User Categories
 # Fine-tuned classes: ['biological', 'cardboard', 'clothes', 'electronics', 'glass', 'metal', 'other', 'paper', 'plastic', 'shoes', 'trash']

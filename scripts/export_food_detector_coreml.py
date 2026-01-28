@@ -82,8 +82,46 @@ def main():
     traced_model = torch.jit.trace(wrapper, dummy_input)
     
     # Define class labels
-    # 0 = not_food, 1 = food
-    class_labels = ["not_food", "food"] 
+    # Training script used 0=food, 1=not_food (based on alphabetical sort of folders 'food', 'not_food')
+    # Core ML ClassifierConfig matches index of output vector to label list.
+    # Our output vector from SoftmaxWrapper is [p_not_food, p_food] (from previous logic)
+    # Wait, SoftmaxWrapper logic: 
+    #   p_food = sigmoid(logits)
+    #   p_not_food = 1.0 - p_food
+    #   return torch.cat([p_not_food, p_food], dim=1)
+    # So Index 0 is "Not Food", Index 1 is "Food".
+    #
+    # BUT, if the model learned 0=Food (negative logic for p_food?)
+    # train_food_binary_torch.py used 0=Food, 1=Not Food.
+    # The model outputs a single logit.
+    # BCEWithLogitsLoss(pos_weight=...) was used.
+    # pos_weight is for the positive class (target=1).
+    # Target 1 was "Not Food".
+    # So the model trained to predict "Not Food" as 1 (high logit) and "Food" as 0 (low logit).
+    #
+    # So:
+    # High Logit -> High p_food (in my wrapper below) -> this is wrong variable naming
+    # wrapper.p_food = sigmoid(logits) -> This gives Probability of Class 1 (Not Food).
+    # wrapper.p_not_food = 1 - p_food -> This gives Probability of Class 0 (Food).
+    # 
+    # Wrapper returns: [p_not_food, p_food] -> [Prob(Food), Prob(Not Food)]
+    # So Index 0 is Food. Index 1 is Not Food.
+    #
+    # Previous code: class_labels = ["not_food", "food"] -> Label 0="not_food", Label 1="food".
+    # Previous Result:
+    #   Model sees Food -> Low Logit -> Low Sigmoid (Prob Class 1 low) -> High Index 0.
+    #   Index 0 labeled "not_food".
+    #   Food -> Classified as "not_food".
+    #   This explains why Food was NOT detected as Food.
+    #
+    #   Model sees Non-Food -> High Logit -> High Sigmoid (Prob Class 1 high) -> High Index 1.
+    #   Index 1 labeled "food".
+    #   Non-Food -> Classified as "food".
+    #   This explains why Recycling (Non-Food) was classified as Compost (Food).
+    #
+    # CORRECTION:
+    # Index 0 is Food. Index 1 is Not Food.
+    class_labels = ["food", "not_food"] 
     classifier_config = ct.ClassifierConfig(class_labels)
     
     # ImageNet Normalization
