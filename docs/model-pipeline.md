@@ -62,6 +62,34 @@ models/recycling-net-11/
 - `config.json` = tells us how many layers, hidden dims, etc.
 - `preprocessor_config.json` = tells us image input size, normalization
 
+### Cascade note (FoodDetector + RecyclingNet11)
+
+For Phase 1 we adopt a two-stage cascade applied per detected object in an image:
+
+- `FoodDetector` (binary): run first to decide whether the object is food.
+    - If food: return `Compost` immediately; skip multi-class inference.
+    - If not food: run `RecyclingNet11` to produce 11 logits and aggregate into 5 disposal categories (`Trash`, `Recycle`, `Compost`, `Biological Waste`, `E-waste`).
+
+This reduces average cost by avoiding the heavier multi-class pass on clearly food examples.
+
+### RecyclingNet11 Class Mapping (11 → 5 Categories)
+
+RecyclingNet11 classifies waste into 11 detailed categories, which are then mapped to 5 final user-facing categories for the app:
+
+| RN Index | RN Class | Final Category |
+|----------|----------|----------------|
+| 0 | Paper | Recycle |
+| 1 | Cardboard | Recycle |
+| 2 | Biological | Compost |
+| 3 | Metals | Recycle |
+| 4 | Plastic | Recycle |
+| 5 | Glass | Recycle |
+| 6 | Clothes | Recycle |
+| 7 | Shoes | Recycle |
+| 8 | Battery | e-Waste |
+| 9 | Trash | Trash |
+| 10 | Other | Trash |
+
 ---
 
 ### **Step 2: Inspect the Model**
@@ -271,6 +299,20 @@ def pytorch_to_onnx():
     print(f"✓ ONNX model valid. Size: {onnx_path.stat().st_size / (1024**2):.1f} MB")
     
     return str(onnx_path), height, width
+
+
+### Notes about conversion environment
+
+- During this session we used a dedicated Python 3.11 virtual environment `./coreml_env` to avoid compatibility issues with `coremltools` and ONNX tooling that appeared on Python 3.14.
+- Two conversion paths are supported in the repo now:
+    - PyTorch -> ONNX -> Core ML (preferred when ONNX path is reliable)
+    - Direct PyTorch tracing -> Core ML (fallback when ONNX conversion has API mismatches)
+
+### Measured latency (development machine)
+
+- `FoodDetector` (binary): mean ~1.19 ms (50 runs)
+- `RecyclingNet11` (11-way): mean ~4.59 ms (50 runs)
+- Combined cascade (naive sum): ~6 ms on the Apple M-series machine used for conversion and benchmarking. Expect higher latencies on iPhone devices; use these as relative baselines.
 
 def onnx_to_coreml(onnx_path: str, height: int, width: int):
     """Step 2: Convert ONNX → Core ML"""

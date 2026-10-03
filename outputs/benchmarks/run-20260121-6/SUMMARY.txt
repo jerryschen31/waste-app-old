@@ -1,0 +1,20 @@
+==================================================
+BENCHMARK SUMMARY (Fine-Tuned Cascade)
+==================================================
+Date: 2026-01-22 00:54:41
+Model: models/coreml/RecyclingNet11ex.mlpackage
+Total Images: 411
+Overall Accuracy: 54.99% (226/411)
+
+Category Performance:
+---------------------
+Compost   :  69.41% (59/85)
+Recycle   :  56.79% (92/162)
+Trash     :  59.18% (29/49)
+e-Waste   :  52.27% (46/88)
+other     :   0.00% (0/27)
+
+Latency (ms):
+Mean:   4.71
+Median: 5.08
+P95:    5.52
